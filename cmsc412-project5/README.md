@@ -9,6 +9,8 @@ In CMSC412, I was tasked with a number of projects involving editing and adding 
 
 The basic structure of GOSFS had <em>file nodes</em>; similar to Unix's inodes, file nodes contained all of the information about a file or directory. A file in GOSFS had 10 blocks, where the first 8 were direct blocks, the 9th was an indirect block, and the 10th a double-indirect block. Directories used only the first block and contain a linear array of more file nodes.
 
+As mentioned in the GitHub repo README, the code I wrote and implemented is in /src/geekos/gosfc.c and /include/geekos/gosfs.h.
+
 Thoughts / Experience
 ---
 Project 5 required the most work out of all of the projects in the class. My final implementation clocked in at 1037 sloc according to GitHub. One of my initial difficulties when working on this project was dealing with the scope of the code required - most of the functions I was expected to implement required other functions to be completed before they would be useful. Furthermore, it was challenging to write succinct and elegant code when dealing with reading and writing data to disk. In the end, I found the best solution to be twofold:
