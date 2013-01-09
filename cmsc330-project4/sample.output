@@ -1,0 +1,60 @@
+Here is a sample session running our Scheme interpreter
+
+% ocaml
+        Objective Caml version 3.08.3
+
+# #use "main.ml";;
+...
+Scheme> nil;;
+nil evaluates to nil
+Scheme> (+ 1 2);;
+(+ 1 2) evaluates to 3
+Scheme> (+ 1 2 3 4 5);;
+(+ 1 2 3 4 5) evaluates to 15
+Scheme> (- 3);;
+(- 3) evaluates to -3
+Scheme> (- 3 4);;
+(- 3 4) evaluates to -1
+Scheme> (- 3 4 5);;
+(- 3 4 5) evaluates to -6
+Scheme> (* 1 2 3 4);;
+(* 1 2 3 4) evaluates to 24
+Scheme> (= 1 2);;
+(= 1 2) evaluates to #f
+Scheme> (= 1 1);;
+(= 1 1) evaluates to #t
+Scheme> (boolean? #t);;
+(boolean? #t) evaluates to #t
+Scheme> (boolean? 3);;
+(boolean? 3) evaluates to #f
+Scheme> (define three 3);;
+(define three 3) evaluates to nil
+Scheme> three;;
+three evaluates to 3
+Scheme> (+ three 4);;
+(+ three 4) evaluates to 7
+Scheme> (define add-two (lambda (n) (+ n 2)));;
+(define add-two (lambda (n) (+ n 2))) evaluates to nil
+Scheme> (add-two 5);;
+(add-two 5) evaluates to 7
+Scheme> (define fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1))))));;
+(define fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1)))))) evaluates to nil
+Scheme> (fact 3);;
+(fact 3) evaluates to 6
+Scheme> (fact 5);;
+(fact 5) evaluates to 120
+Scheme> (define x 52);;
+(define x 52) evaluates to nil
+Scheme> (define foo (lambda (x) (lambda (y) (+ x y))));;
+(define foo (lambda (x) (lambda (y) (+ x y)))) evaluates to nil
+Scheme> ((foo 3) 4);;
+((foo 3) 4) evaluates to 7
+Scheme> (define bar (lambda (y) (+ x y)));;
+(define bar (lambda (y) (+ x y))) evaluates to nil
+Scheme> (bar 2);;
+(bar 2) evaluates to 54
+Scheme> (define x 7);;
+(define x 7) evaluates to nil
+Scheme> (bar 2);;
+(bar 2) evaluates to 9
+

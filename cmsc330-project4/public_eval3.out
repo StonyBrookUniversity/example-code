@@ -1,0 +1,14 @@
+% (define x 52)
+nil
+% (define foo (lambda (x) (lambda (y) (+ x y))))
+nil
+% ((foo 3) 4)
+7
+% (define bar (lambda (y) (+ x y)))
+nil
+% (bar 2)
+54
+% (define x 7)
+nil
+% (bar 2)
+9

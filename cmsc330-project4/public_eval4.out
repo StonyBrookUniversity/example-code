@@ -1,0 +1,12 @@
+% (cons 1 nil)
+(cons 1 nil)
+% (cons 2 (cons 3 nil))
+(cons 2 (cons 3 nil))
+% (car (cons 4 (cons 5 nil)))
+4
+% (cdr (cons 6 (cons 7 nil)))
+(cons 7 nil)
+% (if #t 1 2)
+1
+% (if #f 1 2)
+2

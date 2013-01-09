@@ -1,0 +1,20 @@
+% (boolean? #t)
+#t
+% (boolean? 3)
+#f
+% (define three 3)
+nil
+% three
+3
+% (+ three 4)
+7
+% (define add-two (lambda (n) (+ n 2)))
+nil
+% (add-two 5)
+7
+% (define fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1))))))
+nil
+% (fact 3)
+6
+% (fact 5)
+120
