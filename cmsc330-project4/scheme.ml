@@ -91,12 +91,12 @@ exception Invalid_expression of string;;
 (* Your parser goes here *)
 let rec parse_sexpr lookahead = 
 	match !lookahead with
-	| (TId(x)::t) 		-> lookahead := t; Id(x)
-	| (TNum(x)::t) 		-> lookahead := t; Num(x)
-	| (TString(x)::t) 	-> lookahead := t; String(x)
-	| (TTrue::t) 		-> lookahead := t; Bool(true)
-	| (TFalse::t)		-> lookahead := t; Bool(false)
-	| (TLParen::t) 		-> lookahead := t;
+	| (TId(x)::t) -> lookahead := t; Id(x)
+	| (TNum(x)::t) -> lookahead := t; Num(x)
+	| (TString(x)::t) -> lookahead := t; String(x)
+	| (TTrue::t) -> lookahead := t; Bool(true)
+	| (TFalse::t) -> lookahead := t; Bool(false)
+	| (TLParen::t) -> lookahead := t;
 		let ast_list = parse_list lookahead in
 			(match !lookahead with
 			| (TRParen::t) -> lookahead := t; ast_list
@@ -106,9 +106,9 @@ let rec parse_sexpr lookahead =
 
 and parse_list lookahead =
 	match !lookahead with
-	| (TRParen::t) 	-> List []
-	| [] 			-> List []
-	| _ 			->
+	| (TRParen::t) -> List []
+	| [] -> List []
+	| _ ->
 		let sexpr = [(parse_sexpr lookahead)] in
 		let slist = (parse_list lookahead) in
 			(match slist with
@@ -171,18 +171,18 @@ let get_value env ast =
 
 let rec eval_local env ast = 
 	match ast with
-	| Id(x)		-> get_value env ast
-	| Num(x) 	-> Val_Num x
-	| Bool(x)	-> Val_Bool x
-	| String(x)	-> Val_String x
-	| List(x)	-> 
+	| Id(x) -> get_value env ast
+	| Num(x) -> Val_Num x
+	| Bool(x) -> Val_Bool x
+	| String(x) -> Val_String x
+	| List(x) -> 
 		match x with
 		| [] -> raise Invalid_parameter
 		| Id("lambda")::List([parameter])::body::[] -> 
 			create_closure env parameter body
 		| Id("define")::parameter::value::[] ->
 			let result = eval_local env value in
-			top_level := (parameter,result) :: !top_level; Val_Nil
+				top_level := (parameter,result) :: !top_level; Val_Nil
 		| Id("if")::operands -> if_operator env operands
 		| Id("+")::operands	-> plus_operator env operands
 		| Id("-")::operands	-> minus_operator env operands
@@ -263,7 +263,7 @@ and equals_operator env operands =
 		match eval_local env h with
 		| Val_Num(x) -> 
 			let equals_x y = (Val_Num(x) = y) in
-			Val_Bool(List.for_all equals_x (List.map (eval_local env) t))
+				Val_Bool(List.for_all equals_x (List.map (eval_local env) t))
 		| _ -> raise Invalid_parameter
 
 and cons_operator env operands = 
@@ -271,7 +271,7 @@ and cons_operator env operands =
 	| (x::y::[]) ->
 		let value_x = eval_local env x in
 		let value_y = eval_local env y in
-		Val_Cons(value_x, value_y)
+			Val_Cons(value_x, value_y)
 	| _ -> raise Invalid_parameter
 	
 and car_operator env operand =
@@ -286,22 +286,22 @@ and cdr_operator env operand =
 
 and boolean_operator env operand = 
 	match eval_local env operand with
-	| Val_Bool(x) 	-> Val_Bool(true)
-	| _ 			-> Val_Bool(false)
+	| Val_Bool(x) -> Val_Bool(true)
+	| _ -> Val_Bool(false)
 
 and number_operator env operand = 
 	match eval_local env operand with
-	| Val_Num(x) 	-> Val_Bool(true)
-	| _ 			-> Val_Bool(false)
+	| Val_Num(x) -> Val_Bool(true)
+	| _ -> Val_Bool(false)
 
 and string_operator env operand = 
 	match eval_local env operand with
-	| Val_String(x)	-> Val_Bool(true)
-	| _ 			-> Val_Bool(false)
+	| Val_String(x) -> Val_Bool(true)
+	| _ -> Val_Bool(false)
 
 and pair_operator env operand = 
 	match eval_local env operand with
 	| Val_Cons(x,y) -> Val_Bool(true)
-	| _ 			-> Val_Bool(false)
+	| _ -> Val_Bool(false)
 
 let eval ast = eval_local [] ast;;
